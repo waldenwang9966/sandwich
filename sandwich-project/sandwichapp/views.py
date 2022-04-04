@@ -33,3 +33,13 @@ class IngredientsView(View):
                     "ingredient_type": ingredient_type,
                 },
             )
+
+class SandwichGeneratorView(View):
+    def get(self, request):
+        if request.method == 'GET':
+            selected_meat = random.choice(ingredients['meats'])
+            selected_cheese = random.choice(ingredients['cheeses'])
+            selected_toppings = random.choice(ingredients['toppings'])
+
+            sandwich = f'{selected_meat} & {selected_cheese} with {selected_toppings}'
+            return render(request, 'sandwich_generator.html', context = { 'sandwich' : sandwich})   
